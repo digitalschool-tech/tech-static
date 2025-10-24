@@ -319,26 +319,35 @@ export default function DigitalSchoolRD() {
         name: "AI Team",
         lead: "AI Development",
         members: [
-          { name: "Puhiza Rexha", role: "AI Developer", image: "/team/member1.png" },
-          { name: "Ilir Kicmari", role: "AI Developer", image: "/team/member2.png" },
-          { name: "Alma Kamberi", role: "AI Developer", image: "/team/member1.png" },
-          { name: "Blerta Hajdini", role: "AI Developer", image: "/team/member2.png" },
+          { name: "Puhiza Rexha", role: "AI Developer", image: "/team/puhiza.jpeg" },
+          { name: "Ilir Kicmari", role: "AI Developer", image: "/team/ilir.jpeg" },
+          { name: "Alma Kamberi", role: "AI Developer", image: "/team/alma.jpeg" },
         ],
       },
       {
-        name: "DS Game Engine Team",
+        name: "DS Star",
         lead: "Game Development",
         members: [
-          { name: "Liridona Baliu", role: "Game Developer", image: "/team/member1.png" },
-          { name: "Festa Rexhepi", role: "Game Developer", image: "/team/member2.png" },
+          { name: "Dren Llazani", role: "Developer", image: "/team/member1.png" },
+          { name: "Liridona Baliu", role: "Game Developer", image: "/team/liridona.jpeg" },
+          { name: "Festa Rexhepi", role: "Game Developer", image: "/team/festa.jpeg" },
         ],
       },
       {
         name: "Houses Team",
         lead: "Platform Development",
         members: [
-          { name: "Dion Osmani", role: "Platform Developer", image: "/team/member1.png" },
-          { name: "Vesa Osmani", role: "Platform Developer", image: "/team/member2.png" },
+          { name: "Rigon Ramajli", role: "Developer", image: "/team/rigon.png" },
+          { name: "Dion Osmani", role: "Game Master", image: "/team/dion.png" },
+          { name: "Ilaz Gashi", role: "Junior Game Master", image: "/team/ilaz.jpeg" },
+        ],
+      },
+      {
+        name: "DSOS",
+        lead: "DSOS Development",
+        members: [
+          { name: "Granit Orllati", role: "DevOps", image: "/team/granit.jpeg" },
+          { name: "StarLabs", role: "Outsource", image: "/team/member2.png" },
         ],
       },
     ],
@@ -377,13 +386,7 @@ export default function DigitalSchoolRD() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#00014e] to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
-                <Image src="/logo.png" alt="Digital School" width={24} height={24} className="invert" />
-              </div>
-              <div>
-                <h1 className="text-xl font-semibold text-gray-900 tracking-tight">Digital School</h1>
-                <p className="text-sm text-gray-500 font-medium">R&D Team</p>
-              </div>
+                <Image src="/logo.png" alt="Digital School" width={100} height={0} />
             </div>
             <div className="flex items-center space-x-4">
               <button
@@ -605,7 +608,7 @@ export default function DigitalSchoolRD() {
               <div className="flex space-x-12">
                 {teamStructure.leadership.map((leader, index) => (
                   <div key={index} className="text-center">
-                    <div className="group/card bg-white border-2 border-[#00014e]/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500">
+                    <div className="group/card bg-white border-2 border-[#00014e]/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500 max-w-64 min-w-64">
                       <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 shadow-lg">
                         <Image
                           src={leader.image || "/placeholder.svg"}
@@ -624,15 +627,12 @@ export default function DigitalSchoolRD() {
             </div>
 
             {/* Connecting Lines */}
-            <div className="absolute top-80 left-1/2 transform -translate-x-1/2 w-px h-16 border-l-2 border-dashed border-gray-300"></div>
+            <div className="absolute top-72 left-1/2 transform -translate-x-1/2 w-px h-16 border-l-2 border-dashed border-gray-300"></div>
             <div className="absolute top-96 left-1/4 right-1/4 h-px border-t-2 border-dashed border-gray-300"></div>
 
             {/* Team Branches */}
-            <div className="grid md:grid-cols-3 gap-12 mt-16 relative">
+            <div className="grid md:grid-cols-4 gap-8 mt-16 relative">
               {/* Vertical connecting lines to each team */}
-              <div className="absolute top-0 left-1/6 w-px h-8 border-l-2 border-dashed border-gray-300 transform translate-x-1/2"></div>
-              <div className="absolute top-0 left-1/2 w-px h-8 border-l-2 border-dashed border-gray-300 transform -translate-x-1/2"></div>
-              <div className="absolute top-0 right-1/6 w-px h-8 border-l-2 border-dashed border-gray-300 transform -translate-x-1/2"></div>
 
               {teamStructure.teams.map((team, teamIndex) => (
                 <div key={teamIndex} className="text-center">
@@ -918,8 +918,8 @@ export default function DigitalSchoolRD() {
                 <div className={`${index % 2 === 1 ? "lg:col-start-1" : ""} space-y-8`}>
                   <div>
                     <div className="flex items-center space-x-3 mb-4">
-                      <div className={`p-2 rounded-xl bg-gradient-to-r ${product.color}`}>
-                        <div className="w-6 h-6 text-white">{product.icon}</div>
+                      <div className={`p-4 rounded-xl bg-gradient-to-r ${product.color}`}>
+                        <div className="w-6 h-6 text-white flex items-center justify-center">{product.icon}</div>
                       </div>
                       <div
                         className={`px-3 py-1 rounded-full text-xs font-medium ${
