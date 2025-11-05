@@ -12,9 +12,25 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+			fontFamily: {
+				sans: ['Inter', 'ui-sans-serif', 'system-ui']
+			},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
+				ds: {
+					blue: '#050F54',
+					blueLight: '#0F8CFA',
+					black: '#000000',
+					white: '#FFFFFF',
+					green: '#A3FF00',
+					greenDark: '#6EB800',
+					red: '#FF2E30',
+					redDark: '#CF000A',
+					blueInt: '#003DFF',
+					purple: '#9433EB',
+					purpleDark: '#7017D4'
+				},
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'

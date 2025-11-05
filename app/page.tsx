@@ -1,14 +1,48 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ChevronRight, Sparkles, Zap, Users, Rocket, ChevronLeft, Calendar, Clock, Video, Phone } from "lucide-react"
+import {
+  ChevronRight,
+  Sparkles,
+  Zap,
+  Users,
+  Rocket,
+  ChevronLeft,
+  Calendar,
+  Clock,
+  Video,
+  Phone,
+  Server,
+  BrainCircuit,
+  CloudCog,
+  Code2,
+  Menu,
+  X,
+} from "lucide-react"
 import Image from "next/image"
+import { DSButton } from "../components/DSButton"
 
 export default function DigitalSchoolRD() {
   const [activeProduct, setActiveProduct] = useState(0)
   const [scrollY, setScrollY] = useState(0)
-  const [productSlides, setProductSlides] = useState([0, 0, 0, 0]) // Track current slide for each product
+  const [productSlides, setProductSlides] = useState([0, 0, 0, 0, 0]) 
   const [showCalendly, setShowCalendly] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const headerOffset = 80
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+      setMobileMenuOpen(false)
+    }
+  }
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
@@ -18,6 +52,8 @@ export default function DigitalSchoolRD() {
 
   // Auto-advance slideshow
   useEffect(() => {
+    const reduce = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduce) return
     const interval = setInterval(() => {
       setProductSlides((prev) => prev.map((slide, index) => (slide + 1) % products[index].screenshots.length))
     }, 4000)
@@ -39,9 +75,6 @@ export default function DigitalSchoolRD() {
   const products = [
     {
       name: "DSOS",
-      subtitle: "All-in-One School Management System",
-      description:
-        "Multi-tenant franchise school management system with comprehensive features including CRM, SMS, billing, and more.",
       features: [
         "Rebranding & AveHR Integration",
         "Mobile App & Ticketing System",
@@ -53,20 +86,17 @@ export default function DigitalSchoolRD() {
         "LMS Integration & Website Builder",
       ],
       status: "Coming January 2026",
-      color: "from-blue-600 via-purple-600 to-blue-800",
+      color: "from-[#050f54] to-[#0f8cfa]",
       icon: <Zap className="w-8 h-8" />,
       screenshots: [
-        "/placeholder.svg?height=400&width=600&text=DSOS+Dashboard",
-        "/placeholder.svg?height=400&width=600&text=DSOS+CRM+Interface",
-        "/placeholder.svg?height=400&width=600&text=DSOS+Analytics+View",
-        "/placeholder.svg?height=400&width=600&text=DSOS+Mobile+App",
+        "/products/dsos/dsos-image-1.png",
+        "/products/dsos/dsos-image-2.png",
+        "/products/dsos/dsos-image-3.png",
+        "/products/dsos/dsos-image-4.jpg",
       ],
     },
     {
       name: "Houses",
-      subtitle: "Next-Gen Edutainment Platform",
-      description:
-        "AI-powered personalized learning platform with gamified experiences. Fight aliens while solving coding questions and save sector planets!",
       features: [
         "AI-Powered Personalized Learning",
         "Auto-Generated Quizzes",
@@ -76,42 +106,36 @@ export default function DigitalSchoolRD() {
         "Adaptive Curriculum",
       ],
       status: "Live & Active Development",
-      color: "from-emerald-500 via-teal-600 to-cyan-600",
+      color: "from-[#9433eb] to-[#7017d4]",
       icon: <Sparkles className="w-8 h-8" />,
       screenshots: [
-        "/placeholder.svg?height=400&width=600&text=Houses+Game+Universe",
-        "/placeholder.svg?height=400&width=600&text=Houses+Coding+Challenge",
-        "/placeholder.svg?height=400&width=600&text=Houses+AI+Learning",
-        "/placeholder.svg?height=400&width=600&text=Houses+Progress+Dashboard",
+        "/products/houses/houses-image-1.png",
+        "/products/houses/houses-image-2.png",
+        "/products/houses/houses-image-3.png",
+        "/products/houses/houses-image-4.png",
       ],
     },
     {
-      name: "DSGE",
-      subtitle: "Block-Based Programming Platform",
-      description:
-        "Beautiful and innovative block-based learning programming platform, initially in Albanian with multi-language support planned.",
+      name: "dBlox",
       features: [
         "Visual Block Programming",
         "AI Integration",
-        "Albanian Language Support",
         "Multi-language Expansion",
         "Interactive Learning Modules",
         "Creative Project Building",
       ],
-      status: "Launching September 2025",
-      color: "from-orange-500 via-red-500 to-pink-600",
+      status: "Live & Active Development",
+      color: "from-[#a3ff00] to-[#6eb800]",
       icon: <Rocket className="w-8 h-8" />,
       screenshots: [
-        "/placeholder.svg?height=400&width=600&text=DSGE+Block+Editor",
-        "/placeholder.svg?height=400&width=600&text=DSGE+Project+Gallery",
-        "/placeholder.svg?height=400&width=600&text=DSGE+Albanian+Interface",
-        "/placeholder.svg?height=400&width=600&text=DSGE+AI+Assistant",
+        "/products/dblox/dblox-image-1.png",
+        "/products/dblox/dblox-image-2.png",
+        "/products/dblox/dblox-image-3.png",
+        "/products/dblox/dblox-image-4.png",
       ],
     },
     {
       name: "Parent App",
-      subtitle: "Student Progress Tracking",
-      description: "iOS & Android application for parents to track their children's progress in DSOS system.",
       features: [
         "Real-time Progress Tracking",
         "Grade Monitoring",
@@ -120,191 +144,36 @@ export default function DigitalSchoolRD() {
         "Attendance Tracking",
         "Performance Analytics",
       ],
-      status: "In Development",
-      color: "from-violet-500 via-purple-600 to-indigo-600",
+      status: "Live & Active Development",
+      color: "from-gray-100 to-gray-200",
       icon: <Users className="w-8 h-8" />,
       screenshots: [
-        "/placeholder.svg?height=400&width=600&text=Parent+App+Dashboard",
-        "/placeholder.svg?height=400&width=600&text=Parent+App+Grades",
-        "/placeholder.svg?height=400&width=600&text=Parent+App+Messages",
-        "/placeholder.svg?height=400&width=600&text=Parent+App+Analytics",
-      ],
-    },
-  ]
-
-  const timeline = [
-    {
-      name: "DSOS",
-      color: "from-blue-600 via-purple-600 to-blue-800",
-      bgColor: "bg-blue-50",
-      borderColor: "border-blue-200",
-      textColor: "text-blue-900",
-      icon: <Zap className="w-6 h-6" />,
-      mainDeadline: "January 2026",
-      milestones: [
-        {
-          period: "Before September 2025",
-          items: [
-            "Rebranding & UI Overhaul",
-            "AveHR Integration & Embedded Systems",
-            "Mobile APP Development",
-            "Ticketing System Implementation",
-            "CRM with Lead Injection",
-            "Branch Management System",
-            "Billing & Payment Processing",
-            "Multi-channel Messaging (SMS, Email, WhatsApp)",
-            "Authentication & Security",
-            "Advanced Reporting & Analytics",
-            "Calendar Integration",
-            "App Content & Lessons Management",
-            "User Management System",
-            "Class Health Monitoring",
-            "Payment Connectors",
-            "SaaS Infrastructure",
-            "LMS Integration",
-            "Website Builder",
-          ],
-        },
+        "/products/parent-app/parent-app-image-1.png",
+        "/products/parent-app/parent-app-image-2.png",
+        "/products/parent-app/parent-app-image-3.png",
+        "/products/parent-app/parent-app-image-4.png",
       ],
     },
     {
-      name: "Houses",
-      color: "from-emerald-500 via-teal-600 to-cyan-600",
-      bgColor: "bg-emerald-50",
-      borderColor: "border-emerald-200",
-      textColor: "text-emerald-900",
-      icon: <Sparkles className="w-6 h-6" />,
-      mainDeadline: "Ongoing Development",
-      milestones: [
-        {
-          period: "2024 Completed",
-          items: [
-            "AI Built Missions (Riddles & Personalized)",
-            "Daily Login Rewards System",
-            "240+ Day Reward Cycles",
-            "Character Unlocks (Ghrush, Visix)",
-            "Sieges Implementation",
-          ],
-        },
-        {
-          period: "Early 2025",
-          items: ["Battle Mode Bugs Planet", "Timer System for Bug Planets", "Bag Implementation System"],
-        },
-        {
-          period: "Q2 2025",
-          items: [
-            "Voting System & Government",
-            "Substitute Kahoot Integration",
-            "Custom League Builder",
-            "School Award System",
-          ],
-        },
-        {
-          period: "September 2025",
-          items: [
-            "House Council Launch",
-            "Leaderboard Reconstruction",
-            "Building Structures System",
-            "Reality Check & Stamina Bar",
-            "Sorting Hat Feature",
-            "Platform Rebranding",
-          ],
-        },
-        {
-          period: "Late 2025/2026",
-          items: ["PvP Integration (Optional)", "Cross-platform with DSGE", "Advanced AI Personalization"],
-        },
+      name: "AI Automation",
+      features: [
+        "Intelligent Process Automation",
+        "AI-Powered Workflow Optimization",
+        "Automated Content Generation",
+        "Smart Data Processing",
+        "Predictive Analytics Integration",
+        "Natural Language Processing",
+        "Automated Report Generation",
+        "Intelligent Task Scheduling",
       ],
-    },
-    {
-      name: "DSGE",
-      color: "from-orange-500 via-red-500 to-pink-600",
-      bgColor: "bg-orange-50",
-      borderColor: "border-orange-200",
-      textColor: "text-orange-900",
-      icon: <Rocket className="w-6 h-6" />,
-      mainDeadline: "September 2025",
-      milestones: [
-        {
-          period: "September 2025",
-          items: [
-            "Initial Platform Launch",
-            "Block-based Programming Interface",
-            "Albanian Language Support",
-            "Basic Project Templates",
-            "Student Progress Tracking",
-          ],
-        },
-        {
-          period: "Q4 2025",
-          items: [
-            "Advanced Design Customization",
-            "Theme Builder & Templates",
-            "Enhanced Block Library",
-            "Multi-language Expansion Prep",
-          ],
-        },
-        {
-          period: "2026",
-          items: [
-            "PvP Integration with Houses",
-            "Cross-platform Challenges",
-            "AI-Powered Code Suggestions",
-            "Advanced Project Sharing",
-            "International Language Support",
-          ],
-        },
-      ],
-    },
-    {
-      name: "Parent App",
-      color: "from-violet-500 via-purple-600 to-indigo-600",
-      bgColor: "bg-violet-50",
-      borderColor: "border-violet-200",
-      textColor: "text-violet-900",
-      icon: <Users className="w-6 h-6" />,
-      mainDeadline: "Q3 2025",
-      milestones: [
-        {
-          period: "Q1 2025",
-          items: [
-            "iOS App Development",
-            "Android App Development",
-            "Basic Progress Tracking",
-            "Grade Monitoring System",
-            "Push Notifications Setup",
-          ],
-        },
-        {
-          period: "Q2 2025",
-          items: [
-            "Teacher Communication Portal",
-            "Assignment Tracking",
-            "Attendance Monitoring",
-            "Performance Analytics Dashboard",
-            "Multi-child Support",
-          ],
-        },
-        {
-          period: "Q3 2025",
-          items: [
-            "DSOS Integration Complete",
-            "Real-time Sync",
-            "Advanced Reporting",
-            "Parent-Teacher Conferences",
-            "App Store Launch",
-          ],
-        },
-        {
-          period: "Q4 2025",
-          items: [
-            "AI-Powered Insights",
-            "Learning Recommendations",
-            "Behavioral Analytics",
-            "Multi-language Support",
-            "Offline Mode",
-          ],
-        },
+      status: "In Development",
+      color: "from-[#ff6b35] to-[#ff8c42]",
+      icon: <BrainCircuit className="w-8 h-8" />,
+      screenshots: [
+        "/placeholder.svg?height=400&width=600&text=AI+Automation+Dashboard",
+        "/placeholder.svg?height=400&width=600&text=AI+Workflow+Builder",
+        "/placeholder.svg?height=400&width=600&text=AI+Analytics+View",
+        "/placeholder.svg?height=400&width=600&text=AI+Process+Monitor",
       ],
     },
   ]
@@ -317,28 +186,27 @@ export default function DigitalSchoolRD() {
     teams: [
       {
         name: "AI Team",
-        lead: "AI Development",
         members: [
-          { name: "Puhiza Rexha", role: "AI Developer", image: "/team/member1.png" },
-          { name: "Ilir Kicmari", role: "AI Developer", image: "/team/member2.png" },
-          { name: "Alma Kamberi", role: "AI Developer", image: "/team/member1.png" },
-          { name: "Blerta Hajdini", role: "AI Developer", image: "/team/member2.png" },
+          { name: "Puhiza Rexha", role: "AI Engineer", image: "/team/member1.png" },
+          { name: "Alba Pozhegu", role: "AI Engineer", image: "/team/member2.png" },
         ],
       },
       {
-        name: "DS Game Engine Team",
-        lead: "Game Development",
+        name: "Development Team",
         members: [
-          { name: "Liridona Baliu", role: "Game Developer", image: "/team/member1.png" },
-          { name: "Festa Rexhepi", role: "Game Developer", image: "/team/member2.png" },
+          { name: "Rigon Ramajli", role: "Software Engineer", image: "/team/member1.png" },
+          { name: "Granit Orllati", role: "Devops Engineer", image: "/team/member1.png" },
+          { name: "Altin Shabani", role: "QA Automation Engineer", image: "/team/member2.png" },
+          { name: "Valmir Gashi", role: "AI Artist", image: "/team/member3.png" },
         ],
       },
       {
-        name: "Houses Team",
-        lead: "Platform Development",
+        name: "Platform Support Team",
         members: [
-          { name: "Dion Osmani", role: "Platform Developer", image: "/team/member1.png" },
-          { name: "Vesa Osmani", role: "Platform Developer", image: "/team/member2.png" },
+          { name: "Dion Osmani", role: "Game Master & AI Engineer" },
+          { name: "Ilaz Gashi", role: "Platform Support", image: "/team/member1.png" },
+          { name: "Liridona Baliu", role: "dBlox Support", image: "/team/member2.png" },
+          { name: "Festa Rexhepi", role: "dBlox Support", image: "/team/member3.png" },
         ],
       },
     ],
@@ -372,421 +240,179 @@ export default function DigitalSchoolRD() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Mobile Menu Backdrop - Outside header for proper layering */}
+      {mobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-[#050f54] z-40 md:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
       {/* Header */}
-      <header className="fixed top-0 w-full bg-white/80 backdrop-blur-xl border-b border-gray-100/50 z-50 transition-all duration-300">
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${
+        scrollY > 50 ? 'bg-[#050f54]/95 backdrop-blur-xl border-white/10' : 'bg-transparent border-transparent'
+      }`}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#00014e] to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
-                <Image src="/logo.png" alt="Digital School" width={24} height={24} className="invert" />
+            {/* Logo */}
+            <button 
+              onClick={() => scrollToSection('hero')}
+              className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
+            >
+              <div className="w-12 h-12 flex items-center justify-center shadow-lg">
+                <Image src="/logo.png" alt="Digital School" width={40} height={40} />
               </div>
-              <div>
-                <h1 className="text-xl font-semibold text-gray-900 tracking-tight">Digital School</h1>
-                <p className="text-sm text-gray-500 font-medium">R&D Team</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-4">
+            </button>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
               <button
-                onClick={openCalendly}
-                className="group bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-3 rounded-full hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl hover:scale-105"
+                onClick={() => scrollToSection('products')}
+                className="text-white font-bold hover:text-[#a3ff00] transition-colors duration-200"
+              >
+                Products
+              </button>
+              <button
+                onClick={() => scrollToSection('team')}
+                className="text-white font-bold hover:text-[#a3ff00] transition-colors duration-200"
+              >
+                Team
+              </button>
+              <button
+                onClick={() => scrollToSection('technology')}
+                className="text-white font-bold hover:text-[#a3ff00] transition-colors duration-200"
+              >
+                Technology
+              </button>
+              <button
+                onClick={() => scrollToSection('mission')}
+                className="text-white font-bold hover:text-[#a3ff00] transition-colors duration-200"
+              >
+                Mission
+              </button>
+              <DSButton 
+                onClick={openCalendly} 
+                className="px-6 py-2.5 bg-[#a3ff00] hover:bg-[#6eb800] text-[#050f54] font-black rounded-full text-sm transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 <Calendar className="w-4 h-4" />
-                <span className="font-medium">Schedule Demo</span>
-              </button>
-              <a
-                href="https://digitalschool.com"
-                className="group bg-[#00014e] text-white px-6 py-3 rounded-full hover:bg-[#000238] transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl hover:scale-105"
-              >
-                <span className="font-medium">Visit Main Site</span>
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </div>
+                <span>Book Demo</span>
+              </DSButton>
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden pb-6 pt-4 border-t border-white/10 animate-in slide-in-from-top relative z-50 bg-[#050f54]">
+              <nav className="flex flex-col space-y-4">
+                <button
+                  onClick={() => scrollToSection('hero')}
+                  className="text-left text-white font-bold hover:text-[#a3ff00] transition-colors py-2 text-sm"
+                >
+                  Home
+                </button>
+                <button
+                  onClick={() => scrollToSection('products')}
+                  className="text-left text-white font-bold hover:text-[#a3ff00] transition-colors py-2 text-sm"
+                >
+                  Products
+                </button>
+                <button
+                  onClick={() => scrollToSection('team')}
+                  className="text-left text-white font-bold hover:text-[#a3ff00] transition-colors py-2 text-sm"
+                >
+                  Team
+                </button>
+                <button
+                  onClick={() => scrollToSection('technology')}
+                  className="text-left text-white font-bold hover:text-[#a3ff00] transition-colors py-2 text-sm"
+                >
+                  Technology
+                </button>
+                <button
+                  onClick={() => scrollToSection('mission')}
+                  className="text-left text-white font-bold hover:text-[#a3ff00] transition-colors py-2 text-sm"
+                >
+                  About Us
+                </button>
+                <button
+                  onClick={() => scrollToSection('demo')}
+                  className="text-left text-white font-bold hover:text-[#a3ff00] transition-colors py-2 text-sm"
+                >
+                  Contact
+                </button>
+                <DSButton 
+                  onClick={openCalendly} 
+                  className="w-full px-6 py-3 bg-[#a3ff00] hover:bg-[#6eb800] text-[#050f54] font-black rounded-full text-sm transition-all duration-300 shadow-lg"
+                >
+                  <Calendar className="w-4 h-4" />
+                  <span>Book Demo</span>
+                </DSButton>
+              </nav>
+            </div>
+          )}
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-24 relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/20"
-          style={{
-            transform: `translateY(${scrollY * 0.5}px)`,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
-          <div className="text-center max-w-5xl mx-auto">
-            <div className="inline-flex items-center space-x-2 bg-white/60 backdrop-blur-sm border border-gray-200/50 rounded-full px-4 py-2 mb-8 shadow-sm">
-              <Sparkles className="w-4 h-4 text-[#00014e]" />
-              <span className="text-sm font-medium text-gray-700">Innovation at its finest</span>
-            </div>
-
-            <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-[0.9] tracking-tight">
-              <span className="text-gray-900">Innovate.</span>
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00014e] via-blue-600 to-purple-600">
-                Create.
-              </span>
-              <br />
-              <span className="text-gray-900">Transform.</span>
-            </h1>
-
-            <p className="text-xl md:text-2xl text-gray-600 mb-12 leading-relaxed max-w-3xl mx-auto font-light">
-              Pushing forward Digital School with cutting-edge products and curriculum, delivering the best quality to
-              our franchises worldwide.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <button
-                onClick={openCalendly}
-                className="group bg-gradient-to-r from-[#00014e] to-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-3"
-              >
-                <Video className="w-5 h-5" />
-                <span>Book a Product Demo</span>
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <a
-                href="https://digitalschool.com"
-                className="group bg-white text-gray-900 border-2 border-gray-200 px-8 py-4 rounded-full font-semibold hover:border-gray-300 hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-3"
-              >
-                <span>Explore Franchise</span>
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              {[
-                { number: "4", label: "Products", icon: <Rocket className="w-6 h-6" /> },
-                { number: "10+", label: "Team Members", icon: <Users className="w-6 h-6" /> },
-                { number: "2025", label: "Innovation Year", icon: <Sparkles className="w-6 h-6" /> },
-              ].map((stat, index) => (
-                <div
-                  key={index}
-                  className="group bg-white/70 backdrop-blur-sm border border-gray-200/50 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:scale-105 transition-all duration-500"
-                >
-                  <div className="flex items-center justify-center mb-4 text-[#00014e] group-hover:scale-110 transition-transform duration-300">
-                    {stat.icon}
-                  </div>
-                  <div className="text-4xl font-bold text-gray-900 mb-2">{stat.number}</div>
-                  <div className="text-gray-600 font-medium">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Schedule Meeting Section */}
-      <section className="py-20 bg-gradient-to-r from-emerald-50 to-teal-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="bg-white rounded-3xl p-12 shadow-xl border border-gray-100">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="inline-flex items-center space-x-2 bg-emerald-100 border border-emerald-200 rounded-full px-4 py-2 mb-6">
-                  <Calendar className="w-4 h-4 text-emerald-600" />
-                  <span className="text-sm font-medium text-emerald-700">Let's Connect</span>
-                </div>
-
-                <h2 className="text-4xl font-bold text-gray-900 mb-6 tracking-tight">
-                  Ready to See Our Products in Action?
-                </h2>
-                <p className="text-xl text-gray-600 mb-8 leading-relaxed font-light">
-                  Schedule a personalized demo with our R&D team. We'll show you how our innovative solutions can
-                  transform your educational institution.
-                </p>
-
-                <div className="space-y-4 mb-8">
-                  {[
-                    { icon: <Video className="w-5 h-5" />, text: "Live product demonstrations" },
-                    { icon: <Users className="w-5 h-5" />, text: "Meet our development team" },
-                    { icon: <Rocket className="w-5 h-5" />, text: "Discuss implementation roadmap" },
-                    { icon: <Phone className="w-5 h-5" />, text: "Q&A with technical experts" },
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600">
-                        {item.icon}
-                      </div>
-                      <span className="text-gray-700 font-medium">{item.text}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <button
-                  onClick={openCalendly}
-                  className="group bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-2xl font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center space-x-3"
-                >
-                  <Calendar className="w-5 h-5" />
-                  <span>Schedule Your Demo</span>
-                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
+      <section id="hero" className="pt-32 pb-24 relative overflow-hidden bg-[#050f54]">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-8">
+              <div className="inline-flex items-center space-x-2 bg-[#a3ff00]/20 backdrop-blur-sm border border-[#a3ff00]/30 rounded-full px-5 py-2 mb-8">
+                <Sparkles className="w-4 h-4 text-[#a3ff00]" />
+                <span className="text-sm font-bold text-[#a3ff00]">Future Ready</span>
               </div>
-
-              <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl p-8 text-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-12 -translate-x-12"></div>
-
-                <div className="relative">
-                  <h3 className="text-2xl font-bold mb-6">What You'll Get:</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-start space-x-3">
-                      <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-1">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold mb-1">30-Minute Demo</h4>
-                        <p className="text-emerald-100 text-sm">Comprehensive walkthrough of all products</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                      <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-1">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold mb-1">Technical Deep Dive</h4>
-                        <p className="text-emerald-100 text-sm">Architecture and integration possibilities</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                      <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-1">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold mb-1">Custom Roadmap</h4>
-                        <p className="text-emerald-100 text-sm">Tailored implementation plan for your needs</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission Section */}
-      <section className="py-32 bg-gradient-to-b from-white to-gray-50/50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center space-x-2 bg-[#00014e]/5 border border-[#00014e]/10 rounded-full px-4 py-2 mb-8">
-              <div className="w-2 h-2 bg-[#00014e] rounded-full animate-pulse" />
-              <span className="text-sm font-medium text-[#00014e]">Our Mission</span>
-            </div>
-
-            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8 tracking-tight">Redefining Education</h2>
-
-            <p className="text-xl text-gray-600 leading-relaxed font-light">
-              To push forward Digital School in products and curriculum, providing the best quality educational
-              technology solutions to our franchises. We're committed to innovation, excellence, and transforming the
-              future of education through technology.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Tree Section */}
-      <section className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center space-x-2 bg-purple-50 border border-purple-100 rounded-full px-4 py-2 mb-8">
-              <Users className="w-4 h-4 text-purple-600" />
-              <span className="text-sm font-medium text-purple-700">Our Organization</span>
-            </div>
-
-            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">Team Structure</h2>
-            <p className="text-xl text-gray-600 font-light">The brilliant minds working together to innovate</p>
-          </div>
-
-          {/* Organizational Tree */}
-          <div className="relative">
-            {/* Leadership Level */}
-            <div className="flex justify-center mb-16">
-              <div className="flex space-x-12">
-                {teamStructure.leadership.map((leader, index) => (
-                  <div key={index} className="text-center">
-                    <div className="group/card bg-white border-2 border-[#00014e]/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500">
-                      <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 shadow-lg">
-                        <Image
-                          src={leader.image || "/placeholder.svg"}
-                          alt={leader.name}
-                          width={128}
-                          height={128}
-                          className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-500"
-                        />
-                      </div>
-                      <h4 className="text-xl font-bold text-gray-900 mb-2 tracking-tight">{leader.name}</h4>
-                      <p className="text-[#00014e] font-semibold">{leader.role}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Connecting Lines */}
-            <div className="absolute top-80 left-1/2 transform -translate-x-1/2 w-px h-16 border-l-2 border-dashed border-gray-300"></div>
-            <div className="absolute top-96 left-1/4 right-1/4 h-px border-t-2 border-dashed border-gray-300"></div>
-
-            {/* Team Branches */}
-            <div className="grid md:grid-cols-3 gap-12 mt-16 relative">
-              {/* Vertical connecting lines to each team */}
-              <div className="absolute top-0 left-1/6 w-px h-8 border-l-2 border-dashed border-gray-300 transform translate-x-1/2"></div>
-              <div className="absolute top-0 left-1/2 w-px h-8 border-l-2 border-dashed border-gray-300 transform -translate-x-1/2"></div>
-              <div className="absolute top-0 right-1/6 w-px h-8 border-l-2 border-dashed border-gray-300 transform -translate-x-1/2"></div>
-
-              {teamStructure.teams.map((team, teamIndex) => (
-                <div key={teamIndex} className="text-center">
-                  {/* Team Header */}
-                  <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-6 mb-8 border border-gray-200">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2 tracking-tight">{team.name}</h3>
-                    <p className="text-gray-600 font-medium">{team.lead}</p>
-                  </div>
-
-                  {/* Team Members */}
-                  <div className="space-y-6">
-                    {team.members.map((member, memberIndex) => (
-                      <div key={memberIndex} className="relative">
-                        {/* Connecting line to team header */}
-                        {memberIndex === 0 && (
-                          <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-px h-8 border-l-2 border-dashed border-gray-300"></div>
-                        )}
-
-                        <div className="group/member bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300">
-                          <div className="flex items-center space-x-4">
-                            <div className="w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 shadow-md flex-shrink-0">
-                              <Image
-                                src={member.image || "/placeholder.svg"}
-                                alt={member.name}
-                                width={64}
-                                height={64}
-                                className="w-full h-full object-cover group-hover/member:scale-110 transition-transform duration-300"
-                              />
-                            </div>
-                            <div className="text-left">
-                              <h4 className="text-lg font-semibold text-gray-900 tracking-tight">{member.name}</h4>
-                              <p className="text-gray-600 font-medium">{member.role}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline Section */}
-      <section className="py-32 bg-gradient-to-b from-gray-50/50 to-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center space-x-2 bg-indigo-50 border border-indigo-100 rounded-full px-4 py-2 mb-8">
-              <Calendar className="w-4 h-4 text-indigo-600" />
-              <span className="text-sm font-medium text-indigo-700">Development Timeline</span>
-            </div>
-
-            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">Roadmap to Innovation</h2>
-            <p className="text-xl text-gray-600 font-light max-w-3xl mx-auto">
-              Our comprehensive development timeline showcasing the journey of each product from conception to launch
-            </p>
-          </div>
-
-          {/* Timeline Grid */}
-          <div className="space-y-16">
-            {timeline.map((project, projectIndex) => (
-              <div key={projectIndex} className="relative">
-                {/* Project Header */}
-                <div className="flex items-center mb-12">
-                  <div
-                    className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${project.color} flex items-center justify-center text-white shadow-lg mr-6`}
-                  >
-                    {project.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-3xl font-bold text-gray-900 tracking-tight">{project.name}</h3>
-                    <p className="text-lg text-gray-600 font-medium">Target: {project.mainDeadline}</p>
-                  </div>
-                </div>
-
-                {/* Timeline Milestones */}
-                <div className="relative">
-                  {/* Main Timeline Line */}
-                  <div
-                    className={`absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b ${project.color} opacity-30`}
-                  ></div>
-
-                  <div className="space-y-8">
-                    {project.milestones.map((milestone, milestoneIndex) => (
-                      <div key={milestoneIndex} className="relative">
-                        {/* Timeline Node */}
-                        <div
-                          className={`absolute left-6 w-5 h-5 rounded-full bg-gradient-to-r ${project.color} shadow-lg z-10`}
-                        ></div>
-
-                        {/* Milestone Content */}
-                        <div className="ml-20">
-                          <div
-                            className={`${project.bgColor} ${project.borderColor} border-2 rounded-3xl p-8 shadow-sm hover:shadow-lg transition-shadow duration-300`}
-                          >
-                            <div className="flex items-center mb-6">
-                              <Clock className={`w-5 h-5 ${project.textColor} mr-3`} />
-                              <h4 className={`text-xl font-bold ${project.textColor} tracking-tight`}>
-                                {milestone.period}
-                              </h4>
-                            </div>
-
-                            {/* Milestone Items Grid */}
-                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                              {milestone.items.map((item, itemIndex) => (
-                                <div
-                                  key={itemIndex}
-                                  className="group flex items-start space-x-3 p-4 bg-white/70 rounded-2xl hover:bg-white hover:shadow-md transition-all duration-200"
-                                >
-                                  <div
-                                    className={`w-2 h-2 rounded-full bg-gradient-to-r ${project.color} mt-2 group-hover:scale-125 transition-transform duration-200 flex-shrink-0`}
-                                  ></div>
-                                  <span className="text-gray-800 font-medium text-sm leading-relaxed group-hover:text-gray-900 transition-colors">
-                                    {item}
-                                  </span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Timeline Summary */}
-          <div className="mt-20 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 rounded-3xl p-12 text-white relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-            <div className="relative text-center">
-              <h3 className="text-3xl font-bold mb-6 tracking-tight">Synchronized Development</h3>
-              <p className="text-xl text-blue-100 font-light mb-8 max-w-3xl mx-auto">
-                All products are being developed in parallel, with strategic integration points to create a seamless
-                educational ecosystem.
+              <h1 className="text-6xl md:text-8xl font-black tracking-tight text-white mb-8 leading-tight">
+                <span className="block text-[#0f8cfa]">Meet. Create.</span>
+                <span className="block text-[#a3ff00]">Celebrate.</span>
+              </h1>
+              <p className="text-xl md:text-2xl text-white/90 max-w-2xl mb-8 font-medium">
+                improvise. code. overcome.
               </p>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {timeline.map((project, index) => (
-                  <div key={index} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                    <div className="flex items-center justify-center mb-4">
-                      <div
-                        className={`w-12 h-12 rounded-xl bg-gradient-to-r ${project.color} flex items-center justify-center`}
-                      >
-                        {project.icon}
-                      </div>
-                    </div>
-                    <h4 className="text-lg font-semibold mb-2">{project.name}</h4>
-                    <p className="text-blue-100 text-sm font-light">{project.mainDeadline}</p>
+              <p className="text-base md:text-lg text-white/70 max-w-2xl mb-12 leading-relaxed">
+                We design and build the technology that powers Digital School — creating meaningful learning experiences through innovative products and curriculum.
+              </p>
+              
+              {/* Statistics Blocks */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+                {[
+                  { number: "6", label: "ACTIVE PRODUCTS", color: "#ff2e30" },
+                  { number: "50K+", label: "STUDENTS", color: "#9433eb" },
+                  { number: "200+", label: "LOCATIONS", color: "#a3ff00" },
+                  { number: "100%", label: "SUCCESS RATE", color: "#0f8cfa" },
+                ].map((stat, index) => (
+                  <div 
+                    key={index} 
+                    className="rounded-2xl p-6 shadow-2xl hover:scale-105 transition-transform duration-300"
+                    style={{ backgroundColor: stat.color }}
+                  >
+                    <div className="text-4xl md:text-5xl font-black text-white mb-2">{stat.number}</div>
+                    <div className="text-white/90 font-black text-xs uppercase tracking-wider leading-tight">{stat.label}</div>
                   </div>
                 ))}
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <DSButton onClick={openCalendly} className="px-10 py-4 bg-[#ff2e30] hover:bg-[#dc0000] text-white font-black rounded-full text-lg shadow-2xl hover:scale-105 transition-all duration-300">
+                  <Video className="h-5 w-5" /> 
+                  <span>Book a Demo</span>
+                </DSButton>
+                <DSButton 
+                  onClick={() => scrollToSection('products')} 
+                  className="px-10 py-4 bg-white/10 hover:bg-white/20 text-white border-2 border-white/30 font-black rounded-full text-lg backdrop-blur-sm transition-all duration-300"
+                >
+                  <span>Explore Products</span>
+                  <ChevronRight className="h-5 w-5" />
+                </DSButton>
               </div>
             </div>
           </div>
@@ -794,19 +420,19 @@ export default function DigitalSchoolRD() {
       </section>
 
       {/* Products Portfolio Section with Slideshow */}
-      <section className="py-32 bg-gradient-to-b from-gray-50/50 to-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center space-x-2 bg-blue-50 border border-blue-100 rounded-full px-4 py-2 mb-8">
-              <Rocket className="w-4 h-4 text-blue-600" />
-              <span className="text-sm font-medium text-blue-700">Our Portfolio</span>
+      <section id="products" className="py-32 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
+          <div className="text-left mb-20">
+            <div className="inline-flex items-center space-x-2 bg-[#ff2e30] rounded-full px-5 py-2 mb-8">
+              <Rocket className="w-4 h-4 text-white" />
+              <span className="text-sm font-black text-white uppercase tracking-wide">Our Products</span>
             </div>
 
-            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">Innovation Showcase</h2>
-            <p className="text-xl text-gray-600 font-light max-w-3xl mx-auto">
-              Discover our cutting-edge solutions that are revolutionizing education technology and transforming
-              learning experiences worldwide.
-            </p>
+            <h2 className="text-5xl md:text-7xl font-black text-[#050f54] mb-8 tracking-tight leading-tight">
+              Innovation <span className="text-[#ff2e30]">Showcase</span>
+            </h2>
+            <p className="text-2xl text-gray-700 font-medium max-w-3xl">
+              Explore real products that shape how students learn and teachers teach - designed with creativity, research, and real-world classroom feedback.            </p>
           </div>
 
           {/* Product Showcase Grid with Slideshow */}
@@ -818,10 +444,11 @@ export default function DigitalSchoolRD() {
               >
                 {/* Product Visual with Slideshow */}
                 <div className={`${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
-                  <div className="relative group">
-                    <div
-                      className={`w-full h-96 rounded-3xl bg-gradient-to-br ${product.color} shadow-2xl relative overflow-hidden`}
-                    >
+                  {(() => {
+                    const isParentApp = product.name === "Parent App"
+                    return (
+                      <div className={`relative group ${isParentApp ? "flex justify-center" : ""}`}>
+                        <div className={`${isParentApp ? "w-full max-w-[450px] h-[640px] md:max-w-[480px] md:h-[700px]" : "w-full h-96"} rounded-[32px] bg-gradient-to-br ${product.color} shadow-2xl relative overflow-hidden border-4 border-white`}>
                       {/* Screenshot Slideshow */}
                       <div className="absolute inset-4 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden">
                         <div className="relative w-full h-full">
@@ -829,19 +456,20 @@ export default function DigitalSchoolRD() {
                             src={product.screenshots[productSlides[index]] || "/placeholder.svg"}
                             alt={`${product.name} Screenshot ${productSlides[index] + 1}`}
                             fill
-                            className="object-cover transition-opacity duration-500"
+                            className={`${isParentApp ? "object-contain" : "object-cover"} transition-opacity duration-500`}
                           />
+                          {!isParentApp && <div className="absolute inset-0 bg-black/50 pointer-events-none" aria-hidden="true" />}
 
                           {/* Slideshow Controls */}
                           <button
                             onClick={() => prevSlide(index)}
-                            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white p-2 rounded-full backdrop-blur-sm transition-all duration-200"
+                            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white p-2 rounded-full backdrop-blur-sm transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-ds-blueLight"
                           >
                             <ChevronLeft className="w-5 h-5" />
                           </button>
                           <button
                             onClick={() => nextSlide(index)}
-                            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white p-2 rounded-full backdrop-blur-sm transition-all duration-200"
+                            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white p-2 rounded-full backdrop-blur-sm transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-ds-blueLight"
                           >
                             <ChevronRight className="w-5 h-5" />
                           </button>
@@ -856,6 +484,7 @@ export default function DigitalSchoolRD() {
                                     prev.map((slide, pIndex) => (pIndex === index ? slideIndex : slide)),
                                   )
                                 }
+                                aria-current={productSlides[index] === slideIndex ? 'true' : 'false'}
                                 className={`w-2 h-2 rounded-full transition-all duration-200 ${
                                   productSlides[index] === slideIndex ? "bg-white" : "bg-white/50 hover:bg-white/75"
                                 }`}
@@ -870,7 +499,6 @@ export default function DigitalSchoolRD() {
                         <div className="p-3 bg-white/20 backdrop-blur-sm rounded-2xl">{product.icon}</div>
                         <div>
                           <h3 className="text-2xl font-bold">{product.name}</h3>
-                          <p className="text-white/80 font-medium">{product.subtitle}</p>
                         </div>
                       </div>
 
@@ -898,7 +526,7 @@ export default function DigitalSchoolRD() {
                     <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-xl border border-gray-100 group-hover:scale-105 transition-transform duration-300">
                       <div className="text-center">
                         <div className="text-2xl font-bold text-gray-900 mb-1">
-                          {index === 0 ? "15+" : index === 1 ? "Live" : index === 2 ? "AI" : "iOS/Android"}
+                          {index === 0 ? "15+" : index === 1 ? "Live" : index === 2 ? "AI" : index === 3 ? "iOS/Android" : "Automated"}
                         </div>
                         <div className="text-sm text-gray-600 font-medium">
                           {index === 0
@@ -907,52 +535,59 @@ export default function DigitalSchoolRD() {
                               ? "Platform"
                               : index === 2
                                 ? "Powered"
-                                : "Native Apps"}
+                                : index === 3
+                                  ? "Native Apps"
+                                  : "Workflows"}
                         </div>
                       </div>
                     </div>
                   </div>
+                    )
+                  })()}
                 </div>
 
                 {/* Product Details */}
                 <div className={`${index % 2 === 1 ? "lg:col-start-1" : ""} space-y-8`}>
                   <div>
-                    <div className="flex items-center space-x-3 mb-4">
-                      <div className={`p-2 rounded-xl bg-gradient-to-r ${product.color}`}>
+                      <div className="flex items-center space-x-3 mb-6">
+                      <div className={`p-3 rounded-xl bg-gradient-to-r ${product.color} shadow-lg`}>
                         <div className="w-6 h-6 text-white">{product.icon}</div>
                       </div>
                       <div
-                        className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        className={`px-4 py-2 rounded-full text-xs font-black uppercase tracking-wider ${
                           product.status.includes("Live")
-                            ? "bg-green-100 text-green-800"
+                            ? "bg-[#a3ff00] text-[#050f54]"
                             : product.status.includes("Coming")
-                              ? "bg-blue-100 text-blue-800"
-                              : "bg-orange-100 text-orange-800"
+                              ? "bg-[#0f8cfa] text-white"
+                              : "bg-[#ff2e30] text-white"
                         }`}
                       >
                         {product.status}
                       </div>
                     </div>
 
-                    <h3 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">{product.name}</h3>
-                    <h4 className="text-xl text-gray-600 font-medium mb-6">{product.subtitle}</h4>
-                    <p className="text-lg text-gray-600 leading-relaxed font-light mb-8">{product.description}</p>
+                    <h3 className="text-4xl md:text-5xl font-black text-[#050f54] mb-4 tracking-tight leading-tight">{product.name}</h3>
                   </div>
 
                   {/* Feature List */}
                   <div className="space-y-6">
-                    <h5 className="text-xl font-semibold text-gray-900">Key Capabilities</h5>
-                    <div className="grid gap-4">
+                    <div className="grid gap-3">
                       {product.features.map((feature, featureIndex) => (
                         <div
                           key={featureIndex}
-                          className="group flex items-start space-x-4 p-4 rounded-2xl hover:bg-gray-50 transition-colors duration-200"
+                          className="group flex items-start space-x-4 p-4 rounded-2xl bg-gray-50 hover:bg-white border-2 border-transparent hover:border-[#9433eb] transition-all duration-200"
                         >
-                          <div
-                            className={`w-3 h-3 rounded-full bg-gradient-to-r ${product.color} mt-2 group-hover:scale-125 transition-transform duration-200`}
+                          <div className={`w-3 h-3 rounded-full mt-2 group-hover:scale-125 transition-transform duration-200`} 
+                            style={{ 
+                              backgroundColor: index === 0 ? '#0f8cfa' : 
+                                             index === 1 ? '#9433eb' : 
+                                             index === 2 ? '#a3ff00' : 
+                                             index === 3 ? '#ff2e30' :
+                                             '#ff6b35'
+                            }} 
                           />
                           <div>
-                            <span className="text-gray-800 font-medium group-hover:text-gray-900 transition-colors">
+                            <span className="text-gray-800 font-bold group-hover:text-[#050f54] transition-colors text-lg">
                               {feature}
                             </span>
                           </div>
@@ -963,52 +598,52 @@ export default function DigitalSchoolRD() {
 
                   {/* Action Button */}
                   <div className="pt-6">
-                    <button
-                      onClick={openCalendly}
-                      className={`group inline-flex items-center space-x-3 bg-gradient-to-r ${product.color} text-white px-8 py-4 rounded-2xl font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105`}
-                    >
-                      <span>Schedule Demo</span>
-                      <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </button>
+                    <DSButton onClick={openCalendly} className="px-10 py-4 bg-[#ff2e30] hover:bg-[#dc0000] text-white font-black rounded-full text-lg shadow-xl hover:scale-105 transition-all duration-300">
+                      <span>Explore {product.name}</span>
+                      <ChevronRight className="w-5 h-5" />
+                    </DSButton>
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Portfolio Summary */}
-          <div className="mt-32 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 rounded-3xl p-12 text-white relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-            <div className="relative">
-              <div className="text-center mb-12">
-                <h3 className="text-3xl font-bold mb-4 tracking-tight">Complete Education Ecosystem</h3>
-                <p className="text-xl text-blue-100 font-light">
-                  Our integrated suite of products creates a seamless educational experience from management to
-                  learning.
-                </p>
+        </div>
+      </section>
+
+      {/* Mission Section */}
+      <section id="mission" className="py-32 bg-[#050f54] text-white relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-8 text-left">
+              <div className="inline-flex items-center space-x-2 bg-[#9433eb] rounded-full px-5 py-2 mb-8">
+                <Sparkles className="w-4 h-4 text-white" />
+                <span className="text-sm font-black text-white uppercase tracking-wide">Our Mission</span>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <h2 className="text-5xl md:text-6xl font-black text-white mb-8 tracking-tight leading-tight">
+                Redefining <span className="text-[#a3ff00]">Education</span>
+              </h2>
+
+              <p className="text-xl text-white/90 leading-relaxed mb-8 font-medium">
+                To push forward Digital School in products and curriculum, providing the best quality educational
+                technology solutions to our franchises worldwide.
+              </p>
+              
+              <p className="text-lg text-white/70 leading-relaxed font-medium">
+                We're committed to innovation, excellence, and transforming the future of education through cutting-edge technology and engaging learning experiences.
+              </p>
+
+              <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                  {
-                    title: "Management",
-                    desc: "DSOS handles all administrative needs",
-                    icon: <Zap className="w-6 h-6" />,
-                  },
-                  {
-                    title: "Learning",
-                    desc: "Houses provides engaging education",
-                    icon: <Sparkles className="w-6 h-6" />,
-                  },
-                  { title: "Programming", desc: "DSGE teaches coding skills", icon: <Rocket className="w-6 h-6" /> },
-                  { title: "Tracking", desc: "Parent App monitors progress", icon: <Users className="w-6 h-6" /> },
+                  { icon: "💡", title: "Innovation", desc: "Cutting-edge solutions" },
+                  { icon: "⭐", title: "Excellence", desc: "Highest quality" },
+                  { icon: "🚀", title: "Impact", desc: "Transform education" },
                 ].map((item, index) => (
-                  <div key={index} className="text-center group">
-                    <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                      {item.icon}
-                    </div>
-                    <h4 className="text-lg font-semibold mb-2">{item.title}</h4>
-                    <p className="text-blue-100 text-sm font-light">{item.desc}</p>
+                  <div key={index} className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300">
+                    <div className="text-4xl mb-3">{item.icon}</div>
+                    <h3 className="text-xl font-black text-white mb-2">{item.title}</h3>
+                    <p className="text-white/70 font-medium">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -1017,56 +652,351 @@ export default function DigitalSchoolRD() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-32 bg-gradient-to-br from-[#00014e] via-blue-900 to-purple-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-        <div className="max-w-5xl mx-auto text-center px-6 lg:px-8 relative">
-          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-8">
-            <Sparkles className="w-4 h-4 text-blue-300" />
-            <span className="text-sm font-medium text-blue-100">Join the Revolution</span>
+      {/* Team Tree Section */}
+      <section id="team" className="py-32 bg-gradient-to-b from-white via-gray-50/30 to-white relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
+          {/* Header Section */}
+          <div className="mb-24 text-center">
+            <div className="inline-flex items-center justify-center space-x-3 bg-[#9433eb] rounded-full px-6 py-3 mb-8 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+              <Users className="w-5 h-5 text-white" />
+              <span className="text-sm font-black text-white uppercase tracking-wider">OUR TEAM</span>
+            </div>
+            <h2 className="text-5xl md:text-7xl font-black text-[#050f54] mb-6 tracking-tight leading-tight">
+              Meet the <span className="text-[#ff2e30]">Innovators</span>
+            </h2>
+            <p className="text-xl text-gray-600 font-medium max-w-2xl mx-auto leading-relaxed">
+              The brilliant minds pushing education forward
+            </p>
           </div>
 
-          <h2 className="text-5xl md:text-6xl font-bold mb-8 tracking-tight">Ready to Transform Education?</h2>
-          <p className="text-xl text-blue-100 mb-12 leading-relaxed font-light max-w-3xl mx-auto">
-            Join the Digital School franchise network and bring cutting-edge educational technology to your community.
-          </p>
+          {/* Leadership - Floating Cards with Rotation */}
+          <div className="grid md:grid-cols-2 gap-6 mb-20">
+            {teamStructure.leadership.map((leader, index) => (
+              <div
+                key={index}
+                className="relative overflow-hidden rounded-[32px] p-8 bg-gradient-to-br from-[#0f8cfa] via-[#050f54] to-[#0f8cfa] shadow-xl hover:shadow-2xl transition-all duration-700 group"
+                style={{
+                  transform: `rotate(${index === 0 ? '-1.5deg' : '1.5deg'})`,
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#a3ff00]/10 via-transparent to-[#9433eb]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="absolute -top-16 -right-16 w-48 h-48 bg-[#a3ff00]/20 rounded-full blur-3xl group-hover:scale-150 transition-all duration-700" />
+                <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-[#9433eb]/20 rounded-full blur-3xl group-hover:scale-150 transition-all duration-700" />
+                
+                <div className="relative z-10">
+                  <h4 className="text-3xl md:text-4xl font-black text-white mb-3 tracking-tight leading-tight group-hover:text-[#a3ff00] transition-colors duration-500">
+                    {leader.name}
+                  </h4>
+                  <p className="text-[#a3ff00] font-black text-xl md:text-2xl">{leader.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={openCalendly}
-              className="group inline-flex items-center space-x-4 bg-emerald-500 hover:bg-emerald-600 text-white px-10 py-5 rounded-full font-semibold transition-all duration-300 text-lg shadow-2xl hover:shadow-3xl hover:scale-105"
-            >
-              <Calendar className="w-5 h-5" />
-              <span>Schedule Demo</span>
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
-            </button>
-            <a
-              href="https://digitalschool.com"
-              className="group inline-flex items-center space-x-4 bg-white text-[#00014e] px-10 py-5 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 text-lg shadow-2xl hover:shadow-3xl hover:scale-105"
-            >
-              <span>Explore Franchise Opportunities</span>
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
-            </a>
+          {/* Teams - Horizontal Grid Layout */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {teamStructure.teams.map((team, teamIndex) => {
+              const teamConfig = [
+                { 
+                  gradient: 'from-[#9433eb] via-[#0f8cfa] to-[#9433eb]',
+                  accent: '#9433eb',
+                  icon: <Sparkles className="w-6 h-6" />
+                },
+                { 
+                  gradient: 'from-[#a3ff00] via-[#6eb800] to-[#a3ff00]',
+                  accent: '#a3ff00',
+                  icon: <Code2 className="w-6 h-6" />
+                },
+                { 
+                  gradient: 'from-[#ff2e30] via-[#9433eb] to-[#ff2e30]',
+                  accent: '#ff2e30',
+                  icon: <Users className="w-6 h-6" />
+                },
+              ]
+              const config = teamConfig[teamIndex]
+              
+              return (
+                <div
+                  key={teamIndex}
+                  className="relative transition-all duration-700 hover:scale-[1.02] group h-full flex flex-col"
+                >
+                  {/* Main Team Container */}
+                  <div className="relative bg-white rounded-[28px] shadow-xl overflow-hidden border-2 border-gray-100 group-hover:border-gray-200 transition-all duration-500 flex flex-col h-full">
+                    {/* Animated Gradient Header */}
+                    <div className={`h-3 bg-gradient-to-r ${config.gradient} relative overflow-hidden`}>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                    </div>
+                    
+                    {/* Team Header Section */}
+                    <div className="p-6 pb-5">
+                      <div className="flex items-start justify-between mb-6">
+                        <div className="flex items-start space-x-3 flex-1 min-w-0">
+                          <div 
+                            className="w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 flex-shrink-0"
+                            style={{ 
+                              background: `linear-gradient(135deg, ${config.accent}, ${config.accent}dd)`
+                            }}
+                      >
+                        {config.icon}
+                          </div>
+                          <div className="flex-1 pt-1 min-w-0">
+                            <h3 className="text-xl md:text-2xl font-black text-[#050f54] tracking-tight mb-2 break-words">
+                              {team.name}
+                            </h3>
+                            <div className="flex items-center space-x-2">
+                              <div className="w-2 h-2 rounded-full bg-[#a3ff00] animate-pulse flex-shrink-0" />
+                              <span className="text-xs font-bold text-gray-500 whitespace-nowrap">{team.members.length} Talented Professionals</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Team Members - Vertical Stack with Enhanced Cards */}
+                    <div className="px-6 pb-6 flex-1">
+                    <div className="space-y-3">
+                      {team.members.map((member, memberIndex) => (
+                        <div
+                          key={memberIndex}
+                            className="group/member relative overflow-hidden rounded-2xl p-4 bg-gradient-to-br from-gray-50 via-white to-gray-50 hover:from-white hover:via-gray-50 hover:to-white border-2 border-transparent hover:border-gray-200 transition-all duration-500 hover:shadow-lg hover:-translate-y-1"
+                          >
+                            {/* Animated Accent Line */}
+                            <div 
+                              className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-current to-transparent opacity-0 group-hover/member:opacity-100 transition-opacity duration-300"
+                              style={{ color: config.accent }}
+                            />
+                            
+                            <div className="flex items-start justify-between pl-3 min-w-0">
+                              <div className="flex-1 min-w-0 pr-3">
+                                <h4 
+                                  className="text-base font-black mb-1 transition-colors duration-300 break-words"
+                                  style={{
+                                    color: '#050f54'
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    const style = e.currentTarget.style as any
+                                    style.background = `linear-gradient(to right, ${config.accent}, ${config.accent}dd)`
+                                    style.webkitBackgroundClip = 'text'
+                                    style.backgroundClip = 'text'
+                                    style.WebkitTextFillColor = 'transparent'
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    const style = e.currentTarget.style as any
+                                    style.background = 'none'
+                                    style.webkitBackgroundClip = 'unset'
+                                    style.backgroundClip = 'unset'
+                                    style.WebkitTextFillColor = 'unset'
+                                  }}
+                                >
+                              {member.name}
+                            </h4>
+                                <p className="text-sm text-gray-600 font-semibold break-words leading-tight">{member.role}</p>
+                          </div>
+                              <div className="flex items-center space-x-2 ml-3 flex-shrink-0">
+                                <div 
+                                  className="w-3 h-3 rounded-full flex-shrink-0 group-hover/member:scale-125 group-hover/member:shadow-lg transition-all duration-500"
+                                  style={{ 
+                                    backgroundColor: config.accent,
+                                    boxShadow: `0 0 0 0 ${config.accent}40`
+                                  }}
+                                />
+                              </div>
+                            </div>
+                            
+                            {/* Hover Glow Effect */}
+                            <div 
+                              className="absolute inset-0 rounded-2xl opacity-0 group-hover/member:opacity-20 transition-opacity duration-500 blur-xl"
+                              style={{ 
+                                background: `radial-gradient(circle at center, ${config.accent}, transparent)`
+                              }}
+                            />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  </div>
+
+                  {/* Floating Decorative Elements */}
+                  <div 
+                    className="absolute -top-6 -right-6 w-32 h-32 rounded-full blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none"
+                    style={{ backgroundColor: config.accent }}
+                  />
+                  <div 
+                    className="absolute -bottom-6 -left-6 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
+                    style={{ backgroundColor: config.accent }}
+                  />
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Technology Section */}
+      <section id="technology" className="py-32 bg-[#050f54] text-white relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
+          <div className="mb-20 text-left">
+            <div className="inline-flex items-center space-x-2 bg-[#0f8cfa] rounded-full px-5 py-2 mb-6">
+              <Code2 className="w-4 h-4 text-white" />
+              <span className="text-sm font-black text-white uppercase tracking-wide">Tech Stack</span>
+            </div>
+            <h2 className="text-5xl md:text-6xl font-black text-white mb-6 tracking-tight leading-tight">
+              Powered by <span className="text-[#a3ff00]">Innovation</span>
+            </h2>
+            <p className="text-xl text-white/90 max-w-3xl font-medium">
+              We leverage cutting-edge technology to build scalable, robust educational products that transform learning.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                category: "Frontend",
+                icon: <Code2 className="w-8 h-8" />,
+                tech: ["React", "Vue.js", "TypeScript"],
+                color: "#0f8cfa",
+              },
+              {
+                category: "Backend",
+                icon: <Server className="w-8 h-8" />,
+                tech: ["Laravel", "Inertia", "GraphQL / REST"],
+                color: "#9433eb",
+              },
+              {
+                category: "AI & ML",
+                icon: <BrainCircuit className="w-8 h-8" />,
+                tech: ["Python", "TensorFlow", "LangChain"],
+                color: "#a3ff00",
+              },
+              {
+                category: "DevOps",
+                icon: <CloudCog className="w-8 h-8" />,
+                tech: ["AWS / DigitalOcean", "Docker", "CI/CD"],
+                color: "#ff2e30",
+              },
+            ].map((stack, index) => (
+              <div
+                key={index}
+                className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all duration-300"
+              >
+                <div
+                  className="flex items-center justify-center w-16 h-16 rounded-2xl mb-6 shadow-lg"
+                  style={{ backgroundColor: stack.color }}
+                >
+                  <div className="text-white">
+                    {stack.icon}
+                  </div>
+                </div>
+                <h3 className="text-2xl font-black text-white mb-6 group-hover:text-[#a3ff00] transition-colors">{stack.category}</h3>
+                <ul className="space-y-3">
+                  {stack.tech.map((item, itemIndex) => (
+                    <li key={itemIndex} className="flex items-center space-x-3">
+                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: stack.color }} />
+                      <span className="text-white/90 font-medium group-hover:text-white transition-colors">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Schedule Meeting Section */}
+      <section id="demo" className="py-24 bg-white relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
+          <div className="bg-gradient-to-br from-[#0f8cfa] to-[#050f54] rounded-[32px] p-12 md:p-16 shadow-2xl overflow-hidden relative">
+            <div className="grid lg:grid-cols-2 gap-12 items-center relative">
+              {/* Left Side Content */}
+              <div>
+                <div className="inline-flex items-center space-x-2 bg-[#a3ff00]/90 border border-[#a3ff00] rounded-full px-5 py-2 mb-6">
+                  <Calendar className="w-4 h-4 text-[#050f54]" />
+                  <span className="text-sm font-black text-[#050f54] uppercase tracking-wide">LET'S CONNECT</span>
+                </div>
+
+                <h2 className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight leading-tight">
+                  Ready to Transform Education?
+                </h2>
+                <p className="text-lg text-white/90 mb-10 leading-relaxed font-medium">
+                  Book a personalized demo with our R&D team and discover how we're revolutionizing learning for the next generation.
+                </p>
+
+                <div className="space-y-4 mb-10">
+                  {[
+                    { icon: <Video className="w-5 h-5" />, text: "Live product demonstrations", color: "#ff2e30" },
+                    { icon: <Users className="w-5 h-5" />, text: "Meet our brilliant team", color: "#9433eb" },
+                    { icon: <Rocket className="w-5 h-5" />, text: "Custom implementation plan", color: "#a3ff00" },
+                    { icon: <Phone className="w-5 h-5" />, text: "Q&A with tech experts", color: "#0f8cfa" },
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center space-x-4 group">
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-lg" style={{ backgroundColor: item.color }}>
+                        {item.icon}
+                      </div>
+                      <span className="text-white font-bold text-lg group-hover:translate-x-2 transition-transform duration-200">{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <DSButton onClick={openCalendly} className="px-10 py-4 bg-[#ff2e30] hover:bg-[#dc0000] text-white font-black rounded-full text-lg shadow-2xl hover:scale-105 transition-all duration-300">
+                  <Calendar className="w-5 h-5" />
+                  <span>Book Your Demo Now</span>
+                  <ChevronRight className="w-5 h-5" />
+                </DSButton>
+              </div>
+
+              {/* Right Side Content */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 relative">
+                <h3 className="text-2xl font-black text-white mb-8">What You'll Experience:</h3>
+                <div className="space-y-6">
+                  {[
+                    { icon: "⏱️", title: "30-Min Live Demo", desc: "Full product walkthrough" },
+                    { icon: "🚀", title: "Tech Deep Dive", desc: "Architecture & integrations" },
+                    { icon: "📋", title: "Custom Roadmap", desc: "Tailored for your needs" },
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-start space-x-4 p-4 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors duration-200">
+                      <div className="text-3xl">{item.icon}</div>
+                      <div>
+                        <h4 className="font-black text-white mb-1 text-lg">{item.title}</h4>
+                        <p className="text-white/80 text-sm font-medium">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-4 mb-6 md:mb-0">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#00014e] to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
-                <Image src="/logo.png" alt="Digital School" width={28} height={28} className="invert" />
+      <footer className="bg-[#050f54] text-white py-20 relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="flex items-center space-x-4">
+              <div className="w-16 h-16 flex items-center justify-center shadow-xl">
+                <Image src="/logo.png" alt="Digital School" width={40} height={40} />
               </div>
               <div>
-                <h3 className="text-xl font-bold tracking-tight">Digital School R&D Team</h3>
-                <p className="text-gray-400 font-medium">Innovating the future of education</p>
+                <h3 className="text-2xl font-black tracking-tight">Digital School</h3>
+                <p className="text-[#a3ff00] font-bold text-lg">R&D Team</p>
               </div>
             </div>
             <div className="text-center md:text-right">
-              <p className="text-gray-400 mb-1">© 2025 Digital School. All rights reserved.</p>
-              <p className="text-gray-500 text-sm">Proudly built by our R&D Team</p>
+              <p className="text-white/90 mb-2 font-bold text-lg">© 2025 Digital School. All rights reserved.</p>
+              <div className="flex items-center justify-center md:justify-end gap-3 mt-4">
+                {[
+                  { color: "#0f8cfa", label: "Innovation" },
+                  { color: "#9433eb", label: "Excellence" },
+                  { color: "#a3ff00", label: "Impact" },
+                ].map((item, index) => (
+                  <div 
+                    key={index}
+                    className="w-3 h-3 rounded-full" 
+                    style={{ backgroundColor: item.color }}
+                    title={item.label}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
