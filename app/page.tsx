@@ -144,8 +144,8 @@ export default function DigitalSchoolRD() {
         "Attendance Tracking",
         "Performance Analytics",
       ],
-      status: "In Development",
-      color: "from-[#ff2e30] to-[#dc0000]",
+      status: "Live & Active Development",
+      color: "from-gray-100 to-gray-200",
       icon: <Users className="w-8 h-8" />,
       screenshots: [
         "/products/parent-app/parent-app-image-1.png",
@@ -174,183 +174,6 @@ export default function DigitalSchoolRD() {
         "/placeholder.svg?height=400&width=600&text=AI+Workflow+Builder",
         "/placeholder.svg?height=400&width=600&text=AI+Analytics+View",
         "/placeholder.svg?height=400&width=600&text=AI+Process+Monitor",
-      ],
-    },
-  ]
-
-  const timeline = [
-    {
-      name: "DSOS",
-      color: "from-ds.blue to-ds.blueLight",
-      bgColor: "bg-blue-50",
-      borderColor: "border-blue-200",
-      textColor: "text-blue-900",
-      icon: <Zap className="w-6 h-6" />,
-      mainDeadline: "January 2026",
-      milestones: [
-        {
-          period: "Before September 2025",
-          items: [
-            "Rebranding & UI Overhaul",
-            "AveHR Integration & Embedded Systems",
-            "Mobile APP Development",
-            "Ticketing System Implementation",
-            "CRM with Lead Injection",
-            "Branch Management System",
-            "Billing & Payment Processing",
-            "Multi-channel Messaging (SMS, Email, WhatsApp)",
-            "Authentication & Security",
-            "Advanced Reporting & Analytics",
-            "Calendar Integration",
-            "App Content & Lessons Management",
-            "User Management System",
-            "Class Health Monitoring",
-            "Payment Connectors",
-            "SaaS Infrastructure",
-            "LMS Integration",
-            "Website Builder",
-          ],
-        },
-      ],
-    },
-    {
-      name: "Houses",
-      color: "from-ds.purple to-ds.purpleDark",
-      bgColor: "bg-emerald-50",
-      borderColor: "border-emerald-200",
-      textColor: "text-emerald-900",
-      icon: <Sparkles className="w-6 h-6" />,
-      mainDeadline: "Ongoing Development",
-      milestones: [
-        {
-          period: "2024 Completed",
-          items: [
-            "AI Built Missions (Riddles & Personalized)",
-            "Daily Login Rewards System",
-            "240+ Day Reward Cycles",
-            "Character Unlocks (Ghrush, Visix)",
-            "Sieges Implementation",
-          ],
-        },
-        {
-          period: "Early 2025",
-          items: ["Battle Mode Bugs Planet", "Timer System for Bug Planets", "Bag Implementation System"],
-        },
-        {
-          period: "Q2 2025",
-          items: [
-            "Voting System & Government",
-            "Substitute Kahoot Integration",
-            "Custom League Builder",
-            "School Award System",
-          ],
-        },
-        {
-          period: "September 2025",
-          items: [
-            "House Council Launch",
-            "Leaderboard Reconstruction",
-            "Building Structures System",
-            "Reality Check & Stamina Bar",
-            "Sorting Hat Feature",
-            "Platform Rebranding",
-          ],
-        },
-        {
-          period: "Late 2025/2026",
-          items: ["PvP Integration (Optional)", "Cross-platform with dBlox", "Advanced AI Personalization"],
-        },
-      ],
-    },
-    {
-      name: "dBlox",
-      color: "from-ds.purple to-ds.purpleDark",
-      bgColor: "bg-orange-50",
-      borderColor: "border-orange-200",
-      textColor: "text-orange-900",
-      icon: <Rocket className="w-6 h-6" />,
-      mainDeadline: "September 2025",
-      milestones: [
-        {
-          period: "September 2025",
-          items: [
-            "Initial Platform Launch",
-            "Block-based Programming Interface",
-            "Albanian Language Support",
-            "Basic Project Templates",
-            "Student Progress Tracking",
-          ],
-        },
-        {
-          period: "Q4 2025",
-          items: [
-            "Advanced Design Customization",
-            "Theme Builder & Templates",
-            "Enhanced Block Library",
-            "Multi-language Expansion Prep",
-          ],
-        },
-        {
-          period: "2026",
-          items: [
-            "PvP Integration with Houses",
-            "Cross-platform Challenges",
-            "AI-Powered Code Suggestions",
-            "Advanced Project Sharing",
-            "International Language Support",
-          ],
-        },
-      ],
-    },
-    {
-      name: "Parent App",
-      color: "from-ds.blueLight to-ds.blue",
-      bgColor: "bg-violet-50",
-      borderColor: "border-violet-200",
-      textColor: "text-violet-900",
-      icon: <Users className="w-6 h-6" />,
-      mainDeadline: "Q3 2025",
-      milestones: [
-        {
-          period: "Q1 2025",
-          items: [
-            "iOS App Development",
-            "Android App Development",
-            "Basic Progress Tracking",
-            "Grade Monitoring System",
-            "Push Notifications Setup",
-          ],
-        },
-        {
-          period: "Q2 2025",
-          items: [
-            "Teacher Communication Portal",
-            "Assignment Tracking",
-            "Attendance Monitoring",
-            "Performance Analytics Dashboard",
-            "Multi-child Support",
-          ],
-        },
-        {
-          period: "Q3 2025",
-          items: [
-            "DSOS Integration Complete",
-            "Real-time Sync",
-            "Advanced Reporting",
-            "Parent-Teacher Conferences",
-            "App Store Launch",
-          ],
-        },
-        {
-          period: "Q4 2025",
-          items: [
-            "AI-Powered Insights",
-            "Learning Recommendations",
-            "Behavioral Analytics",
-            "Multi-language Support",
-            "Offline Mode",
-          ],
-        },
       ],
     },
   ]
@@ -556,15 +379,15 @@ export default function DigitalSchoolRD() {
                 improvise. code. overcome.
               </p>
               <p className="text-base md:text-lg text-white/70 max-w-2xl mb-12 leading-relaxed">
-                Pushing forward Digital School with cutting-edge products and curriculum, delivering the best quality educational technology to our franchises worldwide.
+                We design and build the technology that powers Digital School — creating meaningful learning experiences through innovative products and curriculum.
               </p>
               
               {/* Statistics Blocks */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
                 {[
-                  { number: "5", label: "ACTIVE PRODUCTS", color: "#ff2e30" },
-                  { number: "20K+", label: "STUDENTS", color: "#9433eb" },
-                  { number: "500+", label: "APPLICATIONS", color: "#a3ff00" },
+                  { number: "6", label: "ACTIVE PRODUCTS", color: "#ff2e30" },
+                  { number: "50K+", label: "STUDENTS", color: "#9433eb" },
+                  { number: "200+", label: "LOCATIONS", color: "#a3ff00" },
                   { number: "100%", label: "SUCCESS RATE", color: "#0f8cfa" },
                 ].map((stat, index) => (
                   <div 
@@ -609,8 +432,7 @@ export default function DigitalSchoolRD() {
               Innovation <span className="text-[#ff2e30]">Showcase</span>
             </h2>
             <p className="text-2xl text-gray-700 font-medium max-w-3xl">
-              Discover our cutting-edge solutions revolutionizing education technology and transforming learning experiences worldwide.
-            </p>
+              Explore real products that shape how students learn and teachers teach - designed with creativity, research, and real-world classroom feedback.            </p>
           </div>
 
           {/* Product Showcase Grid with Slideshow */}
@@ -626,7 +448,7 @@ export default function DigitalSchoolRD() {
                     const isParentApp = product.name === "Parent App"
                     return (
                       <div className={`relative group ${isParentApp ? "flex justify-center" : ""}`}>
-                        <div className={`${isParentApp ? "w-full max-w-[380px] h-[640px] md:max-w-[420px] md:h-[700px]" : "w-full h-96"} rounded-[32px] bg-gradient-to-br ${product.color} shadow-2xl relative overflow-hidden border-4 border-white`}>
+                        <div className={`${isParentApp ? "w-full max-w-[450px] h-[640px] md:max-w-[480px] md:h-[700px]" : "w-full h-96"} rounded-[32px] bg-gradient-to-br ${product.color} shadow-2xl relative overflow-hidden border-4 border-white`}>
                       {/* Screenshot Slideshow */}
                       <div className="absolute inset-4 bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden">
                         <div className="relative w-full h-full">
@@ -636,7 +458,7 @@ export default function DigitalSchoolRD() {
                             fill
                             className={`${isParentApp ? "object-contain" : "object-cover"} transition-opacity duration-500`}
                           />
-                          <div className="absolute inset-0 bg-black/50 pointer-events-none" aria-hidden="true" />
+                          {!isParentApp && <div className="absolute inset-0 bg-black/50 pointer-events-none" aria-hidden="true" />}
 
                           {/* Slideshow Controls */}
                           <button
@@ -718,8 +540,8 @@ export default function DigitalSchoolRD() {
                                   : "Workflows"}
                         </div>
                       </div>
-                        </div>
-                      </div>
+                    </div>
+                  </div>
                     )
                   })()}
                 </div>
@@ -749,7 +571,6 @@ export default function DigitalSchoolRD() {
 
                   {/* Feature List */}
                   <div className="space-y-6">
-                    <h5 className="text-2xl font-black text-[#050f54]">Key Capabilities</h5>
                     <div className="grid gap-3">
                       {product.features.map((feature, featureIndex) => (
                         <div
@@ -815,8 +636,8 @@ export default function DigitalSchoolRD() {
 
               <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                  { icon: "🎯", title: "Innovation", desc: "Cutting-edge solutions" },
-                  { icon: "💡", title: "Excellence", desc: "Highest quality" },
+                  { icon: "💡", title: "Innovation", desc: "Cutting-edge solutions" },
+                  { icon: "⭐", title: "Excellence", desc: "Highest quality" },
                   { icon: "🚀", title: "Impact", desc: "Transform education" },
                 ].map((item, index) => (
                   <div key={index} className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300">
@@ -915,8 +736,8 @@ export default function DigitalSchoolRD() {
                             style={{ 
                               background: `linear-gradient(135deg, ${config.accent}, ${config.accent}dd)`
                             }}
-                          >
-                            {config.icon}
+                      >
+                        {config.icon}
                           </div>
                           <div className="flex-1 pt-1 min-w-0">
                             <h3 className="text-xl md:text-2xl font-black text-[#050f54] tracking-tight mb-2 break-words">
@@ -933,10 +754,10 @@ export default function DigitalSchoolRD() {
 
                     {/* Team Members - Vertical Stack with Enhanced Cards */}
                     <div className="px-6 pb-6 flex-1">
-                      <div className="space-y-3">
-                        {team.members.map((member, memberIndex) => (
-                          <div
-                            key={memberIndex}
+                    <div className="space-y-3">
+                      {team.members.map((member, memberIndex) => (
+                        <div
+                          key={memberIndex}
                             className="group/member relative overflow-hidden rounded-2xl p-4 bg-gradient-to-br from-gray-50 via-white to-gray-50 hover:from-white hover:via-gray-50 hover:to-white border-2 border-transparent hover:border-gray-200 transition-all duration-500 hover:shadow-lg hover:-translate-y-1"
                           >
                             {/* Animated Accent Line */}
@@ -967,10 +788,10 @@ export default function DigitalSchoolRD() {
                                     style.WebkitTextFillColor = 'unset'
                                   }}
                                 >
-                                  {member.name}
-                                </h4>
+                              {member.name}
+                            </h4>
                                 <p className="text-sm text-gray-600 font-semibold break-words leading-tight">{member.role}</p>
-                              </div>
+                          </div>
                               <div className="flex items-center space-x-2 ml-3 flex-shrink-0">
                                 <div 
                                   className="w-3 h-3 rounded-full flex-shrink-0 group-hover/member:scale-125 group-hover/member:shadow-lg transition-all duration-500"
@@ -989,10 +810,10 @@ export default function DigitalSchoolRD() {
                                 background: `radial-gradient(circle at center, ${config.accent}, transparent)`
                               }}
                             />
-                          </div>
-                        ))}
-                      </div>
+                        </div>
+                      ))}
                     </div>
+                  </div>
                   </div>
 
                   {/* Floating Decorative Elements */}
@@ -1128,7 +949,7 @@ export default function DigitalSchoolRD() {
                 <h3 className="text-2xl font-black text-white mb-8">What You'll Experience:</h3>
                 <div className="space-y-6">
                   {[
-                    { icon: "🎯", title: "30-Min Live Demo", desc: "Full product walkthrough" },
+                    { icon: "⏱️", title: "30-Min Live Demo", desc: "Full product walkthrough" },
                     { icon: "🚀", title: "Tech Deep Dive", desc: "Architecture & integrations" },
                     { icon: "📋", title: "Custom Roadmap", desc: "Tailored for your needs" },
                   ].map((item, index) => (
